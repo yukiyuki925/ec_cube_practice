@@ -87,7 +87,7 @@ class ClassCategoryManagePage extends AbstractAdminPageStyleGuide
 
     public function CSVダウンロード実行()
     {
-        $this->tester->click('body > div > div.c-contentsArea > div.c-outsideBlock > div > div > div.col-6.text-end > div > a:nth-child(1)');
+        $this->tester->click('div > div.c-contentsArea > div.c-contentsArea__cols > div.c-contentsArea__primaryCol > div > div.c-outsideBlock > div > div > div > div > a:nth-child(1)');
 
         return $this;
     }
