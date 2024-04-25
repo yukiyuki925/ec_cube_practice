@@ -200,7 +200,7 @@ class ClassNameController extends AbstractController
     /**
      * 規格CSVの出力.
      *
-     * @Route("/%eccube_admin_route%/product/class_name/export", name="admin_product_class_name_export")
+     * @Route("/%eccube_admin_route%/product/class_name/export", name="admin_product_class_name_export", methods={"GET"})
      *
      * @param Request $request
      *
