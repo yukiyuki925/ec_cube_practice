@@ -280,7 +280,7 @@ class ClassCategoryController extends AbstractController
     /**
      * 規格分類CSVの出力.
      *
-     * @Route("/%eccube_admin_route%/product/class_category/export/{class_name_id}", name="admin_product_class_category_export")
+     * @Route("/%eccube_admin_route%/product/class_category/export/{class_name_id}", name="admin_product_class_category_export", methods={"GET"})
      *
      * @param Request $request
      *
