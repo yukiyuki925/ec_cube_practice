@@ -862,6 +862,52 @@ class EA07BasicinfoCest
 
     /**
      * @group vaddy
+     * @group mailsetting
+     */
+    public function basicinfo_メール設定_テンプレート新規作成_削除(AcceptanceTester $I)
+    {
+        $I->wantTo('EA0709-UC02-T02 メール設定_テンプレート新規作成_削除');
+
+        $id = uniqid();
+        $title = 'title'.$id;
+        $template_name = 'template'.$id;
+        $file_name = 'filename'.$id;
+        $text = 'text'.$id;
+        $html = '<p>HTML</p>'.$id;
+
+        /** テンプレート作成 */
+        MailSettingsPage::go($I)
+            ->入力_新規テンプレート名($template_name)
+            ->入力_ファイル名($file_name)
+            ->入力_件名($title)
+            ->入力_テキスト($text)
+            ->入力_HTML($html)
+            ->登録();
+
+        $I->waitForText('保存しました', 10, MailSettingsPage::$登録完了メッセージ);
+
+        /** 受注メールから送信して確認する */
+        $I->resetEmails();
+        OrderManagePage::go($I)->検索()
+            ->一覧_編集(1)
+            ->遷移_メールを作成()
+            ->選択_メールテンプレート($template_name)
+            ->メール送信();
+
+        // 送信メール確認
+        $I->waitForText('メールを送信しました。', 10, OrderEditPage::$メール送信完了メッセージ);
+        $message = $I->lastMessage();
+        $I->assertCount(2, $message->getRecipients(), 'Bcc で管理者にも送信するので宛先アドレスは2つ');
+        $I->seeEmailCount(1);
+        $I->seeInLastEmailSubjectTo('admin@example.com', '[EC-CUBE SHOP] '.$title);
+
+        /** メールテンプレート削除 */
+        MailSettingsPage::go($I)->入力_テンプレート($template_name)->削除_テンプレート();
+        $I->waitForText('削除しました',10,'#page_admin_setting_shop_mail > div.c-container > div.c-contentsArea > div.alert.alert-success.alert-dismissible.fade.show.m-3 > span');
+    }
+
+    /**
+     * @group vaddy
      * @group csvsetting
      */
     public function basicinfo_CSV出力項目(AcceptanceTester $I)
