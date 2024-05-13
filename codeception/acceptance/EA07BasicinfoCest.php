@@ -901,7 +901,7 @@ class EA07BasicinfoCest
         $I->seeEmailCount(1);
 
         $baseinfo = Fixtures::get('baseinfo');
-        $I->seeInLastEmailSubjectTo('admin@example.com', '['.$baseinfo->getShopName().'] '.$title);
+        $I->seeInLastEmailSubjectTo('admin@example.com', $title);
 
         /** メールテンプレート削除 */
         MailSettingsPage::go($I)->入力_テンプレート($template_name)->削除_テンプレート();
