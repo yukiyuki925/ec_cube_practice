@@ -899,7 +899,9 @@ class EA07BasicinfoCest
         $message = $I->lastMessage();
         $I->assertCount(2, $message->getRecipients(), 'Bcc で管理者にも送信するので宛先アドレスは2つ');
         $I->seeEmailCount(1);
-        $I->seeInLastEmailSubjectTo('admin@example.com', '[EC-CUBE SHOP] '.$title);
+
+        $baseinfo = Fixtures::get('baseinfo');
+        $I->seeInLastEmailSubjectTo('admin@example.com', '['.$baseinfo->getShopName().'] '.$title);
 
         /** メールテンプレート削除 */
         MailSettingsPage::go($I)->入力_テンプレート($template_name)->削除_テンプレート();
