@@ -1065,4 +1065,26 @@ class EA07BasicinfoCest
 
         $I->getScenario()->incomplete('SJISの納品書を確認することが困難なため未実装');
     }
+
+    /**
+     * @group vaddy
+     * @group basicsetting
+     */
+    public function basicinfo_GAタグ設定(AcceptanceTester $I)
+    {
+        $I->wantTo('EA0714-UC01-T01 GAタグ設定');
+
+        // GAタグ設定
+        $page = ShopSettingPage::go($I)
+            ->入力_GAタグ('UA-12345678-1');
+        $I->wait(1);
+        $page->登録();
+
+        $I->waitForText('保存しました', 10, ShopSettingPage::$登録完了メッセージ);
+
+        // GAタグが設定されているか
+        $I->amOnPage('/');
+        $I->seeInPageSource('https://www.googletagmanager.com/gtag/js?id=UA-12345678-1');
+
+    }
 }
