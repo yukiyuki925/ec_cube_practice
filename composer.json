@@ -102,7 +102,7 @@
         "twig/extra-bundle": "^3.3",
         "twig/intl-extra": "^3.3",
         "twig/twig": "^3.8",
-        "vlucas/phpdotenv": "v5.4"
+        "vlucas/phpdotenv": "v5.6.0"
     },
     "require-dev": {
         "captbaritone/mailcatcher-codeception-module": "^3.0",
