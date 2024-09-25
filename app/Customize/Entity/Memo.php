@@ -28,6 +28,14 @@ if (!class_exists('\Customize\Entity\Memo')) {
         private $id;
 
         /**
+         * タイトル
+         * @var string
+         *
+         * @ORM\Column(name="title", type="string", length=255, nullable=false)
+         */
+        private $title;
+
+        /**
          * メモ
          * @var string|null
          *
@@ -77,6 +85,31 @@ if (!class_exists('\Customize\Entity\Memo')) {
 
             return $this;
         }
+
+        /**
+         * Get タイトル
+         *
+         * @return string
+         */
+        public function getTitle()
+        {
+            return $this->title;
+        }
+
+        /**
+         * Set タイトル
+         *
+         * @param string  $title  タイトル
+         *
+         * @return Calendar
+         */
+        public function setTitle($title)
+        {
+            $this->title = $title;
+
+            return $this;
+        }
+
 
         /**
          * Get メモ
